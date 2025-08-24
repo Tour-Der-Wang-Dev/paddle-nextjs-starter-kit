@@ -19,6 +19,7 @@ export function AuthenticationForm({ email, onEmailChange, onPasswordChange, pas
           className={'border-border rounded-xs'}
           type="email"
           id="email"
+          name="email"
           autoComplete={'username'}
           value={email}
           onChange={(e) => onEmailChange(e.target.value)}
@@ -32,6 +33,7 @@ export function AuthenticationForm({ email, onEmailChange, onPasswordChange, pas
           className={'border-border rounded-xs'}
           type="password"
           id="password"
+          name="password"
           autoComplete="current-password"
           value={password}
           onChange={(e) => onPasswordChange(e.target.value)}
