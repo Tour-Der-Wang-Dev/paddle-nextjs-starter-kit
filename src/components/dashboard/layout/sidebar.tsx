@@ -1,6 +1,6 @@
 'use client';
 
-import { Album, CreditCard, Home } from 'lucide-react';
+import { BarChart3, Calendar, MessageCircle, MessagesSquare, Home, Upload } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -12,14 +12,29 @@ const sidebarItems = [
     href: '/dashboard',
   },
   {
-    title: 'Subscriptions',
-    icon: <Album className="h-6 w-6" />,
-    href: '/dashboard/subscriptions',
+    title: 'Content Calendar',
+    icon: <Calendar className="h-6 w-6" />,
+    href: '/dashboard/content-calendar',
   },
   {
-    title: 'Payments',
-    icon: <CreditCard className="h-6 w-6" />,
-    href: '/dashboard/payments',
+    title: 'Upload Posts',
+    icon: <Upload className="h-6 w-6" />,
+    href: '/dashboard/upload-posts',
+  },
+  {
+    title: 'Social Messages',
+    icon: <MessageCircle className="h-6 w-6" />,
+    href: '/dashboard/social-messages',
+  },
+  {
+    title: 'Social Comments',
+    icon: <MessagesSquare className="h-6 w-6" />,
+    href: '/dashboard/social-comments',
+  },
+  {
+    title: 'Analytics',
+    icon: <BarChart3 className="h-6 w-6" />,
+    href: '/dashboard/analytics',
   },
 ];
 
