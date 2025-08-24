@@ -5,19 +5,24 @@ import { redirect } from 'next/navigation';
 
 import { createClient } from '@/utils/supabase/server';
 
-interface FormData {
-  email: string;
-  password: string;
-}
+export async function signup(formData: FormData) {
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
 
-export async function signup(data: FormData) {
+  if (!email || !password) {
+    return { error: 'Email and password are required' };
+  }
+
   const supabase = await createClient();
-  const { error } = await supabase.auth.signUp(data);
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
 
   if (error) {
-    return { error: true };
+    return { error: error.message };
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/dashboard');
 }
