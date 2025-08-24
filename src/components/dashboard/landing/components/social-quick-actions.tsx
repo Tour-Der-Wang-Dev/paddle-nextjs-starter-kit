@@ -55,10 +55,7 @@ export function SocialQuickActions() {
         <div className="grid gap-3">
           {quickActions.map((action, index) => (
             <Link key={index} href={action.href}>
-              <Button
-                variant={action.variant}
-                className="w-full justify-start h-auto p-4"
-              >
+              <Button variant={action.variant} className="w-full justify-start h-auto p-4">
                 <div className="flex items-center space-x-3">
                   {action.icon}
                   <div className="text-left">

@@ -60,9 +60,7 @@ export function SocialOverviewStats() {
               ) : (
                 <TrendingDown className="h-3 w-3 text-red-500" />
               )}
-              <span className={stat.changeType === 'increase' ? 'text-green-500' : 'text-red-500'}>
-                {stat.change}
-              </span>
+              <span className={stat.changeType === 'increase' ? 'text-green-500' : 'text-red-500'}>{stat.change}</span>
               <span className="text-muted-foreground">from last month</span>
             </div>
           </CardContent>

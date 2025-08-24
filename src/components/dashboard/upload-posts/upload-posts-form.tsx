@@ -9,18 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Upload, 
-  Calendar, 
-  Clock, 
-  Image as ImageIcon, 
-  Video, 
-  FileText,
-  X,
-  Send,
-  Save,
-  Sparkles
-} from 'lucide-react';
+import { Upload, Calendar, Clock, Image as ImageIcon, Video, FileText, X, Send, Save, Sparkles } from 'lucide-react';
 
 interface Platform {
   id: string;
@@ -56,43 +45,37 @@ export function UploadPostsForm() {
   const [scheduleTime, setScheduleTime] = useState('');
 
   const togglePlatform = (platformId: string) => {
-    setSelectedPlatforms(prev => 
-      prev.map(platform => 
-        platform.id === platformId 
-          ? { ...platform, selected: !platform.selected }
-          : platform
-      )
+    setSelectedPlatforms((prev) =>
+      prev.map((platform) => (platform.id === platformId ? { ...platform, selected: !platform.selected } : platform)),
     );
   };
 
-  const selectedPlatformsList = selectedPlatforms.filter(p => p.selected);
-  const minCharacterLimit = selectedPlatformsList.length > 0 
-    ? Math.min(...selectedPlatformsList.map(p => p.characterLimit))
-    : 0;
+  const selectedPlatformsList = selectedPlatforms.filter((p) => p.selected);
+  const minCharacterLimit =
+    selectedPlatformsList.length > 0 ? Math.min(...selectedPlatformsList.map((p) => p.characterLimit)) : 0;
 
   const handleMediaUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     const newFiles: MediaFile[] = files.map((file, index) => ({
       id: `${Date.now()}-${index}`,
       name: file.name,
-      type: file.type.startsWith('image/') ? 'image' : 
-            file.type.startsWith('video/') ? 'video' : 'document',
+      type: file.type.startsWith('image/') ? 'image' : file.type.startsWith('video/') ? 'video' : 'document',
       url: URL.createObjectURL(file),
       size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
     }));
-    setMediaFiles(prev => [...prev, ...newFiles]);
+    setMediaFiles((prev) => [...prev, ...newFiles]);
   };
 
   const removeMedia = (fileId: string) => {
-    setMediaFiles(prev => prev.filter(file => file.id !== fileId));
+    setMediaFiles((prev) => prev.filter((file) => file.id !== fileId));
   };
 
   const generateAIContent = () => {
     // Mock AI content generation
     const aiSuggestions = [
       "🚀 Exciting news! We're thrilled to announce our latest feature that will revolutionize your social media experience. Stay tuned for more updates!",
-      "💡 Pro tip: Consistency is key to social media success. Plan your content in advance and engage with your audience regularly for better results.",
-      "🌟 Behind the scenes: Our team has been working tirelessly to bring you the best social media automation tools. Thank you for your continued support!",
+      '💡 Pro tip: Consistency is key to social media success. Plan your content in advance and engage with your audience regularly for better results.',
+      '🌟 Behind the scenes: Our team has been working tirelessly to bring you the best social media automation tools. Thank you for your continued support!',
     ];
     const randomSuggestion = aiSuggestions[Math.floor(Math.random() * aiSuggestions.length)];
     setPostContent(randomSuggestion);
@@ -104,9 +87,7 @@ export function UploadPostsForm() {
         <Card>
           <CardHeader>
             <CardTitle>Create Post</CardTitle>
-            <CardDescription>
-              Compose and schedule your social media posts across multiple platforms
-            </CardDescription>
+            <CardDescription>Compose and schedule your social media posts across multiple platforms</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Platform Selection */}
@@ -116,7 +97,7 @@ export function UploadPostsForm() {
                 {selectedPlatforms.map((platform) => (
                   <Button
                     key={platform.id}
-                    variant={platform.selected ? "default" : "outline"}
+                    variant={platform.selected ? 'default' : 'outline'}
                     className="h-auto p-3 justify-start"
                     onClick={() => togglePlatform(platform.id)}
                   >
@@ -129,7 +110,7 @@ export function UploadPostsForm() {
               </div>
               {selectedPlatformsList.length > 0 && (
                 <div className="text-sm text-muted-foreground">
-                  Selected: {selectedPlatformsList.map(p => p.name).join(', ')}
+                  Selected: {selectedPlatformsList.map((p) => p.name).join(', ')}
                 </div>
               )}
             </div>
@@ -152,7 +133,7 @@ export function UploadPostsForm() {
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>{postContent.length} characters</span>
                 {minCharacterLimit > 0 && (
-                  <span className={postContent.length > minCharacterLimit ? "text-red-500" : ""}>
+                  <span className={postContent.length > minCharacterLimit ? 'text-red-500' : ''}>
                     Limit: {minCharacterLimit}
                   </span>
                 )}
@@ -173,15 +154,11 @@ export function UploadPostsForm() {
                 />
                 <label htmlFor="media-upload" className="cursor-pointer">
                   <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">
-                    Click to upload or drag and drop
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Images, videos, and documents
-                  </p>
+                  <p className="text-sm text-muted-foreground">Click to upload or drag and drop</p>
+                  <p className="text-xs text-muted-foreground mt-1">Images, videos, and documents</p>
                 </label>
               </div>
-              
+
               {mediaFiles.length > 0 && (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {mediaFiles.map((file) => (
@@ -275,9 +252,7 @@ export function UploadPostsForm() {
           </CardHeader>
           <CardContent>
             {selectedPlatformsList.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">
-                Select platforms to see preview
-              </p>
+              <p className="text-sm text-muted-foreground text-center py-8">Select platforms to see preview</p>
             ) : (
               <div className="space-y-4">
                 {selectedPlatformsList.map((platform) => (
@@ -288,9 +263,7 @@ export function UploadPostsForm() {
                       </Avatar>
                       <span className="text-sm font-medium">{platform.name}</span>
                     </div>
-                    <div className="text-sm">
-                      {postContent || "Your post content will appear here..."}
-                    </div>
+                    <div className="text-sm">{postContent || 'Your post content will appear here...'}</div>
                     {mediaFiles.length > 0 && (
                       <div className="mt-2 text-xs text-muted-foreground">
                         📎 {mediaFiles.length} media file{mediaFiles.length !== 1 ? 's' : ''}
@@ -310,15 +283,21 @@ export function UploadPostsForm() {
           <CardContent className="space-y-3">
             <div className="flex items-center justify-between text-sm">
               <span>Auto-shorten links</span>
-              <Button variant="outline" size="sm">Enable</Button>
+              <Button variant="outline" size="sm">
+                Enable
+              </Button>
             </div>
             <div className="flex items-center justify-between text-sm">
               <span>Add hashtags</span>
-              <Button variant="outline" size="sm">Suggest</Button>
+              <Button variant="outline" size="sm">
+                Suggest
+              </Button>
             </div>
             <div className="flex items-center justify-between text-sm">
               <span>Track analytics</span>
-              <Button variant="outline" size="sm">Enable</Button>
+              <Button variant="outline" size="sm">
+                Enable
+              </Button>
             </div>
           </CardContent>
         </Card>

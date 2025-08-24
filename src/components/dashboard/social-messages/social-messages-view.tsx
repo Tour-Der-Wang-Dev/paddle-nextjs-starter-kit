@@ -7,17 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  MessageCircle, 
-  Send, 
-  Search, 
-  Filter,
-  MoreHorizontal,
-  CheckCircle,
-  Clock,
-  AlertCircle
-} from 'lucide-react';
-import { 
+import { MessageCircle, Send, Search, Filter, MoreHorizontal, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -52,7 +43,8 @@ const mockMessages: Message[] = [
       username: '@sarahjohnson',
       avatar: '/api/placeholder/32/32',
     },
-    content: 'Hi! I love your latest post about AI trends. Could you share more insights about machine learning applications?',
+    content:
+      'Hi! I love your latest post about AI trends. Could you share more insights about machine learning applications?',
     timestamp: '2 minutes ago',
     isRead: false,
     priority: 'high',
@@ -66,7 +58,8 @@ const mockMessages: Message[] = [
       name: 'Tech Reviewer',
       username: '@techreviewer',
     },
-    content: 'Just tried @yourhandle amazing social media tool! The automation features are game-changing. Highly recommended! 🚀',
+    content:
+      'Just tried @yourhandle amazing social media tool! The automation features are game-changing. Highly recommended! 🚀',
     timestamp: '15 minutes ago',
     isRead: false,
     priority: 'medium',
@@ -95,7 +88,7 @@ const mockMessages: Message[] = [
       name: 'Emily Rodriguez',
       username: '@emilyrod',
     },
-    content: 'Could you help me with setting up automated posting? I\'m having trouble with the scheduling feature.',
+    content: "Could you help me with setting up automated posting? I'm having trouble with the scheduling feature.",
     timestamp: '3 hours ago',
     isRead: true,
     priority: 'medium',
@@ -109,7 +102,8 @@ const mockMessages: Message[] = [
       name: 'Startup News',
       username: '@startupnews',
     },
-    content: 'Featured in our weekly roundup: @yourhandle social media automation platform is revolutionizing content management!',
+    content:
+      'Featured in our weekly roundup: @yourhandle social media automation platform is revolutionizing content management!',
     timestamp: '1 day ago',
     isRead: true,
     priority: 'low',
@@ -148,19 +142,20 @@ export function SocialMessagesView() {
   const [searchQuery, setSearchQuery] = useState('');
   const [replyText, setReplyText] = useState('');
 
-  const filteredMessages = mockMessages.filter(message => {
-    const matchesSearch = message.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         message.sender.name.toLowerCase().includes(searchQuery.toLowerCase());
-    
+  const filteredMessages = mockMessages.filter((message) => {
+    const matchesSearch =
+      message.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      message.sender.name.toLowerCase().includes(searchQuery.toLowerCase());
+
     if (activeTab === 'all') return matchesSearch;
     if (activeTab === 'unread') return matchesSearch && !message.isRead;
     if (activeTab === 'dms') return matchesSearch && message.type === 'dm';
     if (activeTab === 'mentions') return matchesSearch && message.type === 'mention';
-    
+
     return matchesSearch;
   });
 
-  const unreadCount = mockMessages.filter(m => !m.isRead).length;
+  const unreadCount = mockMessages.filter((m) => !m.isRead).length;
 
   const handleSendReply = () => {
     if (replyText.trim()) {
@@ -212,10 +207,18 @@ export function SocialMessagesView() {
           <CardContent className="p-0">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-4 m-4 mb-0">
-                <TabsTrigger value="all" className="text-xs">All</TabsTrigger>
-                <TabsTrigger value="unread" className="text-xs">Unread</TabsTrigger>
-                <TabsTrigger value="dms" className="text-xs">DMs</TabsTrigger>
-                <TabsTrigger value="mentions" className="text-xs">@</TabsTrigger>
+                <TabsTrigger value="all" className="text-xs">
+                  All
+                </TabsTrigger>
+                <TabsTrigger value="unread" className="text-xs">
+                  Unread
+                </TabsTrigger>
+                <TabsTrigger value="dms" className="text-xs">
+                  DMs
+                </TabsTrigger>
+                <TabsTrigger value="mentions" className="text-xs">
+                  @
+                </TabsTrigger>
               </TabsList>
               <TabsContent value={activeTab} className="mt-0">
                 <div className="space-y-0 max-h-[500px] overflow-y-auto">
@@ -231,29 +234,19 @@ export function SocialMessagesView() {
                     >
                       <div className="flex items-start space-x-3">
                         <Avatar className="h-8 w-8">
-                          <AvatarFallback className="text-xs">
-                            {message.platformIcon}
-                          </AvatarFallback>
+                          <AvatarFallback className="text-xs">{message.platformIcon}</AvatarFallback>
                         </Avatar>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center space-x-2 mb-1">
-                            <span className="text-sm font-medium truncate">
-                              {message.sender.name}
-                            </span>
+                            <span className="text-sm font-medium truncate">{message.sender.name}</span>
                             <div className={`w-2 h-2 rounded-full ${getPriorityColor(message.priority)}`} />
                             {getTypeIcon(message.type)}
                           </div>
-                          <p className="text-sm text-muted-foreground truncate">
-                            {message.content}
-                          </p>
+                          <p className="text-sm text-muted-foreground truncate">{message.content}</p>
                           <div className="flex items-center justify-between mt-1">
-                            <span className="text-xs text-muted-foreground">
-                              {message.timestamp}
-                            </span>
+                            <span className="text-xs text-muted-foreground">{message.timestamp}</span>
                             {message.replies && (
-                              <span className="text-xs text-muted-foreground">
-                                {message.replies} replies
-                              </span>
+                              <span className="text-xs text-muted-foreground">{message.replies} replies</span>
                             )}
                           </div>
                         </div>
@@ -310,20 +303,16 @@ export function SocialMessagesView() {
                 <div className="p-4 bg-muted/30 rounded-lg">
                   <div className="flex items-center space-x-2 mb-2">
                     <Clock className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">
-                      {selectedMessage.timestamp}
-                    </span>
+                    <span className="text-sm text-muted-foreground">{selectedMessage.timestamp}</span>
                     <div className={`w-2 h-2 rounded-full ${getPriorityColor(selectedMessage.priority)}`} />
                     <span className="text-xs text-muted-foreground capitalize">
                       {selectedMessage.priority} priority
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed">
-                    {selectedMessage.content}
-                  </p>
+                  <p className="text-sm leading-relaxed">{selectedMessage.content}</p>
                 </div>
               </div>
-              
+
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
                   <Input
@@ -357,9 +346,7 @@ export function SocialMessagesView() {
             <CardContent className="text-center">
               <MessageCircle className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
               <h3 className="text-lg font-medium mb-2">Select a message</h3>
-              <p className="text-muted-foreground">
-                Choose a message from the list to view and respond
-              </p>
+              <p className="text-muted-foreground">Choose a message from the list to view and respond</p>
             </CardContent>
           </Card>
         )}

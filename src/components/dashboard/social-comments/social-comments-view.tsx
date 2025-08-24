@@ -7,21 +7,21 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  MessageSquare, 
-  Heart, 
-  Reply, 
-  ThumbsUp, 
-  ThumbsDown, 
-  Flag, 
+import {
+  MessageSquare,
+  Heart,
+  Reply,
+  ThumbsUp,
+  ThumbsDown,
+  Flag,
   MoreHorizontal,
   Search,
   Filter,
   CheckCircle,
   Clock,
-  TrendingUp
+  TrendingUp,
 } from 'lucide-react';
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -62,7 +62,8 @@ const mockComments: Comment[] = [
       username: '@davidkim',
       verified: true,
     },
-    content: 'This is exactly what our team has been discussing! The AI automation trends you mentioned are already transforming our workflow. Would love to hear more about implementation strategies.',
+    content:
+      'This is exactly what our team has been discussing! The AI automation trends you mentioned are already transforming our workflow. Would love to hear more about implementation strategies.',
     timestamp: '2 hours ago',
     likes: 24,
     replies: 3,
@@ -81,7 +82,8 @@ const mockComments: Comment[] = [
       name: 'Marketing Pro',
       username: '@marketingpro',
     },
-    content: 'Great tips! However, I think automation can sometimes make content feel less authentic. How do you balance efficiency with genuine engagement?',
+    content:
+      'Great tips! However, I think automation can sometimes make content feel less authentic. How do you balance efficiency with genuine engagement?',
     timestamp: '4 hours ago',
     likes: 12,
     replies: 1,
@@ -100,7 +102,8 @@ const mockComments: Comment[] = [
       name: 'Tech Enthusiast',
       username: '@techenthusiast',
     },
-    content: '🔥🔥🔥 This post is fire! The insights about machine learning applications are spot on. Keep up the amazing work!',
+    content:
+      '🔥🔥🔥 This post is fire! The insights about machine learning applications are spot on. Keep up the amazing work!',
     timestamp: '6 hours ago',
     likes: 45,
     replies: 0,
@@ -119,7 +122,8 @@ const mockComments: Comment[] = [
       name: 'Startup Founder',
       username: '@startupfounder',
     },
-    content: 'I disagree with some of these points. The funding landscape has changed significantly, and these strategies might not work in the current market conditions.',
+    content:
+      'I disagree with some of these points. The funding landscape has changed significantly, and these strategies might not work in the current market conditions.',
     timestamp: '1 day ago',
     likes: 8,
     replies: 2,
@@ -138,7 +142,8 @@ const mockComments: Comment[] = [
       name: 'Jane Smith',
       username: '@janesmith',
     },
-    content: 'Congratulations on the product launch! We\'ve been using it for the past week and the results are impressive. The automation features saved us hours of work.',
+    content:
+      "Congratulations on the product launch! We've been using it for the past week and the results are impressive. The automation features saved us hours of work.",
     timestamp: '2 days ago',
     likes: 18,
     replies: 1,
@@ -181,22 +186,23 @@ export function SocialCommentsView() {
   const [searchQuery, setSearchQuery] = useState('');
   const [replyText, setReplyText] = useState('');
 
-  const filteredComments = mockComments.filter(comment => {
-    const matchesSearch = comment.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         comment.commenter.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         comment.postTitle.toLowerCase().includes(searchQuery.toLowerCase());
-    
+  const filteredComments = mockComments.filter((comment) => {
+    const matchesSearch =
+      comment.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      comment.commenter.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      comment.postTitle.toLowerCase().includes(searchQuery.toLowerCase());
+
     if (activeTab === 'all') return matchesSearch;
     if (activeTab === 'unread') return matchesSearch && !comment.isRead;
     if (activeTab === 'positive') return matchesSearch && comment.sentiment === 'positive';
     if (activeTab === 'negative') return matchesSearch && comment.sentiment === 'negative';
-    
+
     return matchesSearch;
   });
 
-  const unreadCount = mockComments.filter(c => !c.isRead).length;
-  const positiveCount = mockComments.filter(c => c.sentiment === 'positive').length;
-  const negativeCount = mockComments.filter(c => c.sentiment === 'negative').length;
+  const unreadCount = mockComments.filter((c) => !c.isRead).length;
+  const positiveCount = mockComments.filter((c) => c.sentiment === 'positive').length;
+  const negativeCount = mockComments.filter((c) => c.sentiment === 'negative').length;
 
   const handleSendReply = () => {
     if (replyText.trim()) {
@@ -296,10 +302,18 @@ export function SocialCommentsView() {
             <CardContent className="p-0">
               <Tabs value={activeTab} onValueChange={setActiveTab}>
                 <TabsList className="grid w-full grid-cols-4 m-4 mb-0">
-                  <TabsTrigger value="all" className="text-xs">All</TabsTrigger>
-                  <TabsTrigger value="unread" className="text-xs">New</TabsTrigger>
-                  <TabsTrigger value="positive" className="text-xs">😊</TabsTrigger>
-                  <TabsTrigger value="negative" className="text-xs">😞</TabsTrigger>
+                  <TabsTrigger value="all" className="text-xs">
+                    All
+                  </TabsTrigger>
+                  <TabsTrigger value="unread" className="text-xs">
+                    New
+                  </TabsTrigger>
+                  <TabsTrigger value="positive" className="text-xs">
+                    😊
+                  </TabsTrigger>
+                  <TabsTrigger value="negative" className="text-xs">
+                    😞
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value={activeTab} className="mt-0">
                   <div className="space-y-0 max-h-[400px] overflow-y-auto">
@@ -315,32 +329,20 @@ export function SocialCommentsView() {
                       >
                         <div className="flex items-start space-x-3">
                           <Avatar className="h-8 w-8">
-                            <AvatarFallback className="text-xs">
-                              {comment.platformIcon}
-                            </AvatarFallback>
+                            <AvatarFallback className="text-xs">{comment.platformIcon}</AvatarFallback>
                           </Avatar>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center space-x-2 mb-1">
-                              <span className="text-sm font-medium truncate">
-                                {comment.commenter.name}
-                              </span>
-                              {comment.commenter.verified && (
-                                <CheckCircle className="h-3 w-3 text-blue-500" />
-                              )}
+                              <span className="text-sm font-medium truncate">{comment.commenter.name}</span>
+                              {comment.commenter.verified && <CheckCircle className="h-3 w-3 text-blue-500" />}
                               <div className={getSentimentColor(comment.sentiment)}>
                                 {getSentimentIcon(comment.sentiment)}
                               </div>
                             </div>
-                            <p className="text-xs text-muted-foreground mb-1 truncate">
-                              {comment.postTitle}
-                            </p>
-                            <p className="text-sm text-muted-foreground truncate">
-                              {comment.content}
-                            </p>
+                            <p className="text-xs text-muted-foreground mb-1 truncate">{comment.postTitle}</p>
+                            <p className="text-sm text-muted-foreground truncate">{comment.content}</p>
                             <div className="flex items-center justify-between mt-2">
-                              <span className="text-xs text-muted-foreground">
-                                {comment.timestamp}
-                              </span>
+                              <span className="text-xs text-muted-foreground">{comment.timestamp}</span>
                               <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                                 <span className="flex items-center space-x-1">
                                   <Heart className="h-3 w-3" />
@@ -378,9 +380,7 @@ export function SocialCommentsView() {
                     <div>
                       <CardTitle className="text-lg flex items-center space-x-2">
                         <span>{selectedComment.commenter.name}</span>
-                        {selectedComment.commenter.verified && (
-                          <CheckCircle className="h-4 w-4 text-blue-500" />
-                        )}
+                        {selectedComment.commenter.verified && <CheckCircle className="h-4 w-4 text-blue-500" />}
                       </CardTitle>
                       <CardDescription className="flex items-center space-x-2">
                         <span>{selectedComment.commenter.username}</span>
@@ -417,9 +417,7 @@ export function SocialCommentsView() {
                   <div className="p-4 bg-muted/30 rounded-lg">
                     <div className="flex items-center space-x-2 mb-2">
                       <Clock className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">
-                        {selectedComment.timestamp}
-                      </span>
+                      <span className="text-sm text-muted-foreground">{selectedComment.timestamp}</span>
                       <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                         <Heart className="h-4 w-4" />
                         <span>{selectedComment.likes}</span>
@@ -431,12 +429,10 @@ export function SocialCommentsView() {
                         )}
                       </div>
                     </div>
-                    <p className="text-sm leading-relaxed">
-                      {selectedComment.content}
-                    </p>
+                    <p className="text-sm leading-relaxed">{selectedComment.content}</p>
                   </div>
                 </div>
-                
+
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
                     <Input
@@ -474,9 +470,7 @@ export function SocialCommentsView() {
               <CardContent className="text-center">
                 <MessageSquare className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                 <h3 className="text-lg font-medium mb-2">Select a comment</h3>
-                <p className="text-muted-foreground">
-                  Choose a comment from the list to view and respond
-                </p>
+                <p className="text-muted-foreground">Choose a comment from the list to view and respond</p>
               </CardContent>
             </Card>
           )}

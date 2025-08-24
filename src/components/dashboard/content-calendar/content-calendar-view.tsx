@@ -5,15 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { 
-  Calendar, 
-  ChevronLeft, 
-  ChevronRight, 
-  Plus, 
-  Clock,
-  MoreHorizontal 
-} from 'lucide-react';
-import { 
+import { Calendar, ChevronLeft, ChevronRight, Plus, Clock, MoreHorizontal } from 'lucide-react';
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -88,15 +81,15 @@ function generateCalendarDays() {
   const lastDay = new Date(year, month + 1, 0);
   const startDate = new Date(firstDay);
   startDate.setDate(startDate.getDate() - firstDay.getDay());
-  
+
   const days = [];
   const currentDate = new Date(startDate);
-  
+
   for (let i = 0; i < 42; i++) {
     days.push(new Date(currentDate));
     currentDate.setDate(currentDate.getDate() + 1);
   }
-  
+
   return days;
 }
 
@@ -107,14 +100,26 @@ function formatDateKey(date: Date) {
 export function ContentCalendarView() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const calendarDays = generateCalendarDays();
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'];
-  
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
   const today = new Date();
   const isToday = (date: Date) => {
     return date.toDateString() === today.toDateString();
   };
-  
+
   const isCurrentMonth = (date: Date) => {
     return date.getMonth() === currentMonth.getMonth();
   };
@@ -145,9 +150,7 @@ export function ContentCalendarView() {
             <Calendar className="h-5 w-5" />
             <span>Content Calendar</span>
           </CardTitle>
-          <CardDescription>
-            View and manage your scheduled social media posts
-          </CardDescription>
+          <CardDescription>View and manage your scheduled social media posts</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-7 gap-2 mb-4">
@@ -157,12 +160,12 @@ export function ContentCalendarView() {
               </div>
             ))}
           </div>
-          
+
           <div className="grid grid-cols-7 gap-2">
             {calendarDays.map((date, index) => {
               const dateKey = formatDateKey(date);
               const posts = mockScheduledPosts[dateKey] || [];
-              
+
               return (
                 <div
                   key={index}
@@ -172,14 +175,16 @@ export function ContentCalendarView() {
                     ${isToday(date) ? 'ring-2 ring-primary' : ''}
                   `}
                 >
-                  <div className={`
+                  <div
+                    className={`
                     text-sm font-medium mb-2
                     ${isCurrentMonth(date) ? 'text-foreground' : 'text-muted-foreground'}
                     ${isToday(date) ? 'text-primary font-bold' : ''}
-                  `}>
+                  `}
+                  >
                     {date.getDate()}
                   </div>
-                  
+
                   <div className="space-y-1">
                     {posts.slice(0, 2).map((post) => (
                       <div
@@ -190,9 +195,7 @@ export function ContentCalendarView() {
                           <Clock className="h-3 w-3" />
                           <span className="font-medium">{post.time}</span>
                         </div>
-                        <div className="text-xs text-muted-foreground truncate">
-                          {post.content}
-                        </div>
+                        <div className="text-xs text-muted-foreground truncate">{post.content}</div>
                         <div className="flex space-x-1 mt-1">
                           {post.platforms.slice(0, 2).map((platform) => (
                             <Avatar key={platform} className="h-4 w-4">
@@ -202,17 +205,13 @@ export function ContentCalendarView() {
                             </Avatar>
                           ))}
                           {post.platforms.length > 2 && (
-                            <span className="text-xs text-muted-foreground">
-                              +{post.platforms.length - 2}
-                            </span>
+                            <span className="text-xs text-muted-foreground">+{post.platforms.length - 2}</span>
                           )}
                         </div>
                       </div>
                     ))}
                     {posts.length > 2 && (
-                      <div className="text-xs text-muted-foreground text-center py-1">
-                        +{posts.length - 2} more
-                      </div>
+                      <div className="text-xs text-muted-foreground text-center py-1">+{posts.length - 2} more</div>
                     )}
                   </div>
                 </div>

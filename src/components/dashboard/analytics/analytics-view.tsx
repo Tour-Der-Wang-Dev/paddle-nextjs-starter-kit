@@ -5,17 +5,17 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  BarChart3, 
-  TrendingUp, 
-  TrendingDown, 
-  Users, 
-  Heart, 
-  MessageCircle, 
+import {
+  BarChart3,
+  TrendingUp,
+  TrendingDown,
+  Users,
+  Heart,
+  MessageCircle,
   Share2,
   Eye,
   Calendar,
-  Download
+  Download,
 } from 'lucide-react';
 
 interface AnalyticsMetric {
@@ -226,7 +226,9 @@ export function AnalyticsView() {
                     <Avatar className="h-6 w-6">
                       <AvatarFallback className="text-xs">{post.platformIcon}</AvatarFallback>
                     </Avatar>
-                    <Badge variant="outline" className="text-xs">{post.platform}</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      {post.platform}
+                    </Badge>
                   </div>
                   <p className="text-sm mb-3 line-clamp-2">{post.content}</p>
                   <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">

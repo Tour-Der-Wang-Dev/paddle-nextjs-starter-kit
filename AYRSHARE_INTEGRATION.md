@@ -5,7 +5,7 @@ This social media automation app is built with the [Ayrshare API](https://www.ay
 ## Supported Platforms
 
 - **Twitter/X** - Posts, replies, analytics
-- **Instagram** - Posts, stories, analytics  
+- **Instagram** - Posts, stories, analytics
 - **LinkedIn** - Posts, analytics
 - **Facebook** - Posts, analytics
 - **TikTok** - Posts, analytics
@@ -25,6 +25,7 @@ This social media automation app is built with the [Ayrshare API](https://www.ay
 ### 2. Configure Environment Variables
 
 1. Copy `.env.example` to `.env.local`:
+
    ```bash
    cp .env.example .env.local
    ```
@@ -43,6 +44,7 @@ This social media automation app is built with the [Ayrshare API](https://www.ay
 ## Features Included
 
 ### 📝 Content Creation & Scheduling
+
 - Multi-platform post composition
 - Image and video upload support
 - AI-powered content generation
@@ -50,12 +52,14 @@ This social media automation app is built with the [Ayrshare API](https://www.ay
 - Bulk content upload
 
 ### 📅 Content Calendar
+
 - Visual calendar interface
 - Drag-and-drop scheduling
 - Post preview across platforms
 - Optimal timing suggestions
 
 ### 📊 Analytics & Insights
+
 - Cross-platform analytics dashboard
 - Engagement metrics tracking
 - Follower growth analysis
@@ -63,12 +67,14 @@ This social media automation app is built with the [Ayrshare API](https://www.ay
 - Exportable reports
 
 ### 💬 Social Engagement
+
 - Unified inbox for messages and mentions
 - Comment management across platforms
 - Automated response templates
 - Sentiment analysis
 
 ### 🤖 AI-Powered Features
+
 - Content generation based on prompts
 - Hashtag suggestions
 - Image alt-text generation
@@ -82,10 +88,10 @@ This social media automation app is built with the [Ayrshare API](https://www.ay
 import { createPost } from '@/utils/ayrshare/services';
 
 const postData = {
-  post: "Your post content here",
-  platforms: ["twitter", "instagram", "linkedin"],
-  media_urls: ["https://example.com/image.jpg"],
-  shorten_links: true
+  post: 'Your post content here',
+  platforms: ['twitter', 'instagram', 'linkedin'],
+  media_urls: ['https://example.com/image.jpg'],
+  shorten_links: true,
 };
 
 const result = await createPost(postData);
@@ -97,9 +103,9 @@ const result = await createPost(postData);
 import { schedulePost } from '@/utils/ayrshare/services';
 
 const scheduledPost = {
-  post: "Scheduled content",
-  platforms: ["twitter", "linkedin"],
-  scheduleDate: "2024-01-15T10:00:00Z"
+  post: 'Scheduled content',
+  platforms: ['twitter', 'linkedin'],
+  scheduleDate: '2024-01-15T10:00:00Z',
 };
 
 const result = await schedulePost(scheduledPost);
@@ -110,29 +116,33 @@ const result = await schedulePost(scheduledPost);
 ```typescript
 import { getProfileAnalytics } from '@/utils/ayrshare/services';
 
-const analytics = await getProfileAnalytics(["twitter", "instagram"]);
+const analytics = await getProfileAnalytics(['twitter', 'instagram']);
 ```
 
 ## Available API Endpoints
 
 ### Post Management
+
 - `createPost()` - Create and publish posts
 - `schedulePost()` - Schedule posts for future publishing
 - `getScheduledPosts()` - Retrieve scheduled posts
 - `deletePost()` - Delete scheduled posts
 
 ### Analytics
+
 - `getProfileAnalytics()` - Get profile statistics
 - `getPostAnalytics()` - Get individual post performance
 - `getSocialAnalytics()` - Get comprehensive social media analytics
 
 ### Content Tools
+
 - `generateContent()` - AI content generation
 - `generateHashtags()` - AI hashtag suggestions
 - `shortenUrl()` - URL shortening service
 - `uploadMedia()` - Media file uploads
 
 ### Engagement
+
 - `getComments()` - Retrieve comments and mentions
 - `replyToComment()` - Reply to comments
 - `getUser()` - Get user profile information
@@ -140,8 +150,9 @@ const analytics = await getProfileAnalytics(["twitter", "instagram"]);
 ## Rate Limits
 
 Ayrshare implements rate limiting to ensure fair usage:
+
 - **Free Plan**: 5 posts per month
-- **Starter Plan**: 50 posts per month  
+- **Starter Plan**: 50 posts per month
 - **Professional Plan**: 500 posts per month
 - **Business Plan**: 2000 posts per month
 

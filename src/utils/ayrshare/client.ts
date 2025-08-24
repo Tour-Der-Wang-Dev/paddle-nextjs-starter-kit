@@ -5,19 +5,19 @@ export function createAyrshareClient(apiKey?: string) {
   if (!apiKey) {
     throw new Error('Ayrshare API key is required');
   }
-  
+
   return new SocialMediaAPI(apiKey);
 }
 
 // Get client instance with error handling
 export function getAyrshareClient() {
   const apiKey = process.env.AYRSHARE_API_KEY;
-  
+
   if (!apiKey) {
     console.warn('AYRSHARE_API_KEY not found in environment variables');
     return null;
   }
-  
+
   return createAyrshareClient(apiKey);
 }
 
